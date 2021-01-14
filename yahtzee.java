@@ -62,25 +62,35 @@ public class yahtzee
         h1.num_dice = file[1];
         num_rolls = file[2];
         
+        System.out.println("<---- WELCOME TO YAHTZEE ---->\n");
+        System.out.println("Initial Settings:");
         System.out.println("Number of dice in play: " + h1.num_dice);
         System.out.println("Number of sides on each dice: " + h1.num_sides);
         System.out.println("Number of rolls: " + num_rolls);
         System.out.println("Number of rounds: " + NUM_ROUNDS);
         System.out.println();
         
-        System.out.print("Enter 'y' if you would like to edit settings: ");
+        System.out.print("Enter 'y' if you would like to edit settings, Enter 'n' to skip: ");
         edit_settings = input.nextLine();
 
-        if (edit_settings.equals("y")) 
+        if (edit_settings.equals("y") || edit_settings.equals("Y")) // edit settings option
         {
-            System.out.print("Enter Number of Dice: ");
-                h1.num_dice = input.nextInt();
+            do { // to make sure user doesn't enter less than 5 dice  
+                System.out.print("Enter Number of Dice (>= 5): ");
+                        h1.num_dice = input.nextInt();
+            } while (h1.num_dice < 5);
+            
             System.out.print("Enter Number of Sides: ");
                 h1.num_sides = input.nextInt();
             System.out.print("Enter Number of Rolls: ");
                 num_rolls = input.nextInt();
-            System.out.print("Enter Number of Rounds: ");
-                NUM_ROUNDS = input.nextInt();
+            
+            do { // to make sure user doesn't enter more than 13 rounds  
+                System.out.print("Enter Number of Rounds (<= 13): ");
+                    NUM_ROUNDS = input.nextInt();
+            } while (NUM_ROUNDS > 13);
+            
+            System.out.println("\n<---- UPDATED SETTINGS ---->");
             System.out.println("Number of dice in play: " + h1.num_dice);
             System.out.println("Number of sides on each dice: " + h1.num_sides);
             System.out.println("Number of rolls: " + num_rolls);
@@ -114,8 +124,8 @@ public class yahtzee
                 for (i = 0; i < h1.num_dice; i++){
                     keep = keep + 'n';
                 }
-                System.out.println("turn::::::::::::::::::::::::: " + turn);
-                System.out.println("keep::::::::::::::::::::::::: " + keep);
+                System.out.println("turn: " + turn);
+                System.out.println("keep: " + keep);
                 while ((turn < (num_rolls + 1)) & (!keep.equals(yes))) 
                 {  
                     for (i = 0; i < h1.num_dice; ++i) {
@@ -166,3 +176,4 @@ public class yahtzee
     } // end of main
 
 } // end of class
+
